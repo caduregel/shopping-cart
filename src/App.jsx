@@ -1,13 +1,14 @@
+import { Outlet } from 'react-router-dom'
 import './App.css'
-import { Link } from 'react-router-dom'
+import NavBar from './components/navBar/NavBar'
 
 function App() {
 
   return (
-    <>
-      <p>Hello World!</p>
-      <Link to="/test">Click here to go Test</Link>
-    </>
+    <div >
+      <NavBar />
+      <Outlet />
+    </div>
   )
 }
 

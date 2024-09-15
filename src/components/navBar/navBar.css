@@ -1,0 +1,26 @@
+.nav-container {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 4px 8px -2px gray;
+}
+
+.link {
+    float: left;
+    color: #363636;
+    text-align: center;
+    padding: 14px 16px;
+    margin: 0;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.link:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.link.active {
+    transform: scale(1.05);
+    font-weight: 500;
+}
