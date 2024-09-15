@@ -10,7 +10,8 @@ const routes = [
   },
   {
     path: "/test",
-    element: <Test />
+    element: <Test />,
+    errorElement: <ErrorPage />,
   }
 ];
 
