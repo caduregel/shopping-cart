@@ -15,8 +15,8 @@
     font-size: 17px;
 }
 
-.link:hover {
-    background-color: #ddd;
+.link:not(.active):hover {
+    transform: scale(1.08);
     color: black;
 }
 
