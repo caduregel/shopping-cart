@@ -7,7 +7,7 @@ function Cart({ items, removeItem, changeAmmount }) {
         return (
             <div className="cart-container">
                 {items.map((item, index) => {
-                    return <CartItem key={index} title={item.title} image={item.imageUrl} removeItem={removeItem} index={index} changeAmmount={changeAmmount} ammount={item.ammount}/>
+                    return <CartItem key={index} title={item.title} imageUrl={item.imageUrl} removeItem={removeItem} index={index} changeAmmount={changeAmmount} ammount={item.ammount}/>
                 })}
                 <input type="button" name="checkout" value="Checkout" id="checkout-button" />
             </div>

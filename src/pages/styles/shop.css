@@ -1,0 +1,13 @@
+
+.shop-items-container {
+    margin: 30px;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, 25%);
+}
+
+.shop-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

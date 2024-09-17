@@ -1,7 +1,7 @@
 import './cartItem.css'
 
 function CartItem({ title, imageUrl, ammount, index, changeAmmount }) {
-
+    console.log(imageUrl)
     return (
         <div className="cart-item-container">
             <img src={imageUrl} alt={title + ' image'} />

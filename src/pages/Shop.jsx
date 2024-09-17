@@ -1,24 +1,32 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Cart from "../components/cart/Cart"
+import ShopItem from "../components/shopitem/Shopitem"
+
+import './styles/shop.css'
 
 function Shop() {
-  const [cartItems, setCartItems] = useState([
-    {
-      title: "Item",
-      imageUrl: "Link",
-      ammount: 1,
-    },
-    {
-      title: "Item",
-      imageUrl: "Link",
-      ammount: 1,
-    },
-    {
-      title: "Item",
-      imageUrl: "Link",
-      ammount: 1,
-    }
-  ])
+  const [cartItems, setCartItems] = useState([])
+
+  const [shopItems, setShopItems] = useState(null)
+  const [fetchError, setFetchError] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('https://fakestoreapi.com/products', { mode: "cors" }).
+      then(
+        (response) => {
+          if (response.status >= 400) {
+            throw new Error("server error");
+          }
+          return response.json();
+        }
+      ).then((response) => {
+        setShopItems(response)
+      }).catch((error) => setFetchError(error))
+      .finally(() => setLoading(false));
+  }, [])
+
+
 
   const removeItemFromCart = (itemIndex) => {
     const newItems = [...cartItems]
@@ -28,6 +36,18 @@ function Shop() {
     }
 
     setCartItems(newItems)
+  }
+
+  const addItemToCart = (title, imageUrl, ammount) => {
+    const newCartItems = [...cartItems]
+    const newItem = {
+      title: title,
+      imageUrl: imageUrl,
+      ammount: ammount,
+    } 
+    newCartItems.push(newItem)
+
+    setCartItems(newCartItems)
   }
 
   const changeAmmount = (index, sumOrMin) => {
@@ -49,11 +69,20 @@ function Shop() {
     }
   }
 
-  return (
-    <>
-      <Cart items={cartItems} removeItem={removeItemFromCart} changeAmmount={changeAmmount} />
-    </>
-  )
+  if (loading) return <p>Loading...</p>;
+  if (fetchError) return <p>A network error was encountered</p>;
+  if (!loading) {
+    return (
+      <div className="shop-container">
+        <div className="shop-items-container">
+          {shopItems.map((item, index) => {
+            return <ShopItem key={index} imageUrl={item.image} title={item.title} addToCart={addItemToCart}/>
+          })}
+        </div>
+        <Cart items={cartItems} removeItem={removeItemFromCart} changeAmmount={changeAmmount} />
+      </div>
+    )
+  }
 }
 
 export default Shop
