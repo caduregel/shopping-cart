@@ -4,7 +4,6 @@ import './shopItem.css'
 function ShopItem({ title, imageUrl, addToCart }) {
     const [ammountToBuy, setAmmountToBuy] = useState(1)
 
-
     return (
         <div className='shop-item-container'>
             <img src={imageUrl} alt={title + " Image"} />
@@ -12,7 +11,7 @@ function ShopItem({ title, imageUrl, addToCart }) {
             <div className='inputs'>
                 <label>ammount:  </label>
                 <input type="number" value={ammountToBuy} onChange={(e)=>{
-                    setAmmountToBuy(e.target.value)
+                    setAmmountToBuy(parseInt(e.target.value, 10))
                 }}/>
             </div>
                 <button onClick={() => { addToCart(title, imageUrl, ammountToBuy) }}>Add to Cart</button>
